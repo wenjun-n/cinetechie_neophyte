@@ -26,3 +26,5 @@ Mac: /Library/Application Support/Blackmagic Design/DaVinci Resolve/logs/Resolve
 Mac App Store: ~/Library/Containers/com.blackmagic-design.DaVinciResolveAppStore/Data/Library/Application Support/logs/ResolveDebug.txt
 
 Linux: ~/.local/share/DaVinciResolve/logs/ResolveDebug.txt
+
+Read more about EL zone false colour at https://www.elzonesystem.com/
