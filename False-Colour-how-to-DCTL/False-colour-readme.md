@@ -4,7 +4,7 @@ Pls note that DCTL ARE ONLY COMPATIBLE with Resolve Studio (paid version)
 
 Please refer to the images below for the gamma comparison table. I didn't share a version with value for every 0.1 stop calculated 
 as that would be too big a table to refer to, but you can refer to the Excel file named 
-[Scene reflectance to log Reference Table v1.2](False-Colour-how-to-DCTL/Scene reflectance to log Reference Table v1.2.xlsx) 
+##[Scene reflectance to log Reference Table v1.2](False-Colour-how-to-DCTL/Scene reflectance to log Reference Table v1.2.xlsx) 
 If you wish to calculate your own version, feel free to search for the various 
 white papers that the respective manufacturer publishes for each gamma. 
 
