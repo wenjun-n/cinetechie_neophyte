@@ -1,2 +1,0 @@
-*.dctl linguist-language=C
-*.fuse linguist-language=Lua
