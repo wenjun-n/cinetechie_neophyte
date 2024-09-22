@@ -8,7 +8,8 @@ as that would be too big a table to refer to, but you can refer to the Excel fil
 If you wish to calculate your own version, feel free to search for the various 
 white papers that the respective manufacturer publishes for each gamma. 
 
-![Gamma curve 10bit value](https://github.com/user-attachments/assets/bfb95eeb-4efc-4a67-a186-0ecee7a49c37)
+![Gamma curve 10bit value](https://github.com/user-attachments/assets/10759fe4-83d0-4b46-99db-1744acb696fd)
+
 
 ![Gamma in IRE value](https://github.com/user-attachments/assets/808654cf-ddcf-4e2f-830f-fc791a8bedc8)
 
