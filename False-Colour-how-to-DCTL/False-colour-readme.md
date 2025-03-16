@@ -19,6 +19,8 @@ IRE value ranges from 0%-100% (if you take IRE% divide by 100 then multiply by 1
 
 ![Clipping point setting](https://github.com/user-attachments/assets/200cfc17-7a97-48a1-83f6-f1ccfff1df22)
 
+If you wish to have a higher precision of more than four decimal places in the value used to determine your luminance range for the false colour, feel free to reference the excel sheet and reference the "scene linear to Log out data column".
+
 The coding program I used is VS Code: https://code.visualstudio.com/download
 But feel free to use your own coding program. 
 
