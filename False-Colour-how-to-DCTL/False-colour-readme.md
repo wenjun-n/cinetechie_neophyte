@@ -5,6 +5,12 @@ Installation of DCTL is to just copy the file to the LUT folder Davinci Resolve 
 Windows: C:\rogramData\Blackmagic Design\DaVinci Resolve\Support\LUT
 MacOS: /Library/Application Support/Blackmagic Design/DaVinci Resolve/LUT/
 
+DCTLs are applied by first applying "DCTL" onto your node from the effects tab on the colour page, then under the controls, you will have a dropdown box to select the DCTL you wish to use on that node. 
+
+=== Divider ===.dctl is meant to be used as a divider when you have numerous DCTLs installed on your system, this helps searching for DCTLs faster when applying it to a node. Feel free to rename it when you move it into your LUTs folder. 
+
+Please refer to the comments made inside the "Exposure Zone False Colour code demo.dctl" where you will find tips on how to create or make changes to your code on creating your false colour. 
+
 Please refer to the images below for the gamma comparison table. I didn't share a version with value for every 0.1 stop calculated 
 as that would be too big a table to refer to, but you can refer to the Excel file named 
 "Scene reflectance to log Reference Table" 
