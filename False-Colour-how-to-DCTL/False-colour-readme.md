@@ -7,13 +7,14 @@ MacOS: /Library/Application Support/Blackmagic Design/DaVinci Resolve/LUT/
 
 Please refer to the images below for the gamma comparison table. I didn't share a version with value for every 0.1 stop calculated 
 as that would be too big a table to refer to, but you can refer to the Excel file named 
-"Scene reflectance to log Reference Table v1.2" 
+"Scene reflectance to log Reference Table" 
 If you wish to calculate your own version, feel free to search for the various 
 white papers that the respective manufacturer publishes for each gamma. 
 
+10bit Code Value (CV) ranges from 0-1023 for a total of 1024 steps
 ![Gamma curve 10bit value](https://github.com/user-attachments/assets/10759fe4-83d0-4b46-99db-1744acb696fd)
 
-
+IRE value ranges from 0%-100% (if you take IRE% divide by 100 then multiply by 1023 you will get the 10bit CV.
 ![Gamma in IRE value](https://github.com/user-attachments/assets/808654cf-ddcf-4e2f-830f-fc791a8bedc8)
 
 ![Clipping point setting](https://github.com/user-attachments/assets/200cfc17-7a97-48a1-83f6-f1ccfff1df22)
