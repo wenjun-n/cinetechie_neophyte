@@ -1,0 +1,1388 @@
+#line 2 "Exposure Zone False Colour.dctl"
+DEFINE_UI_PARAMS(GammaMode, Gamma_Mode, DCTLUI_COMBO_BOX, 0, { Slog3iso800, Slog3iso12800, Clog2, Clog3, AppleLog55, AppleLog1250, Clog, ArriLogC3, ArriLogC4, Alexa35LogC4, RedLog3G10, BMDFilmG5, PVlog, DlogM, Dlog, NLog, FLog, FLog2}, { Sony S-log3 ISO800, Sony S-log3 ISO12800, Canon C-log2, Canon C-log3, Apple Log55, Apple Log1250, Canon C-log, ARRI LogC3, ARRI LogC4, ARRI Alexa35 LogC4, REDLog3G10 VRaptor VV, BMD Film Gen5, Panasonic V-Log, DJI D-Log M, DJI D-Log, Nikon N-Log, FUjifilm F-Log, Fujifilm F-Log2})
+
+__DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, float p_R, float p_G, float p_B) {
+    
+    // Calculate Luminance
+    float curr_lum = (p_R * 0.2126f + p_G * 0.7152f + p_B * 0.0722f);
+
+// Initialize the Output Color
+float3 output_color = make_float3(0.0f, 0.0f, 0.0f);
+
+if (GammaMode == Slog3iso800)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (886.3 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (807.7 / 1023.0) && curr_lum < (886.3 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (729.1 / 1023.0) && curr_lum <= (807.7 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (650.8 / 1023.0) && curr_lum <= (729.1 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (572.9 / 1023.0) && curr_lum <= (650.8 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (495.7 / 1023.0) && curr_lum <= (572.9 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (464.5 / 1023.0) && curr_lum <= (495.7 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (435.0 / 1023.0) && curr_lum <= (464.5 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (412.6 / 1023.0) && curr_lum <= (435.0 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (383.1 / 1023.0) && curr_lum < (412.6 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (347.1 / 1023.0) && curr_lum < (383.1 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (279.2 / 1023.0) && curr_lum < (347.1 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (219.5 / 1023.0) && curr_lum < (279.2 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (171.0 / 1023.0) && curr_lum < (219.5 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (133.0 / 1023.0) && curr_lum < (171.0 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (105.0 / 1023.0) && curr_lum < (133.0 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (105.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+}
+else if (GammaMode == Slog3iso12800)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (854.8 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (807.7 / 1023.0) && curr_lum < (854.8 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (729.1 / 1023.0) && curr_lum <= (807.7 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (650.8 / 1023.0) && curr_lum <= (729.1 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (572.9 / 1023.0) && curr_lum <= (650.8 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (495.7 / 1023.0) && curr_lum <= (572.9 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (464.5 / 1023.0) && curr_lum <= (495.7 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (435.0 / 1023.0) && curr_lum <= (464.5 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (412.6 / 1023.0) && curr_lum <= (435.0 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (383.1 / 1023.0) && curr_lum < (412.6 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (347.1 / 1023.0) && curr_lum < (383.1 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (279.2 / 1023.0) && curr_lum < (347.1 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (219.5 / 1023.0) && curr_lum < (279.2 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (171.0 / 1023.0) && curr_lum < (219.5 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (133.0 / 1023.0) && curr_lum < (171.0 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (115.4 / 1023.0) && curr_lum < (133.0 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (115.4 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+}
+else if (GammaMode == Clog2)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (859.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (773.3 / 1023.0) && curr_lum < (859.0 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (699.1 / 1023.0) && curr_lum <= (773.3 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (625.2 / 1023.0) && curr_lum <= (699.1 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (551.6 / 1023.0) && curr_lum <= (625.2 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (478.8 / 1023.0) && curr_lum <= (551.6 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (442.9 / 1023.0) && curr_lum <= (478.8 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (421.5 / 1023.0) && curr_lum <= (442.9 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (400.4 / 1023.0) && curr_lum <= (421.5 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (372.6 / 1023.0) && curr_lum < (400.4 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (338.8 / 1023.0) && curr_lum < (372.6 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (274.9 / 1023.0) && curr_lum < (338.8 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (219.0 / 1023.0) && curr_lum < (274.9 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (174.0 / 1023.0) && curr_lum < (219.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (141.6 / 1023.0) && curr_lum < (174.0 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (109.0 / 1023.0) && curr_lum < (141.6 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (109.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == Clog3)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (1001.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (871.5 / 1023.0) && curr_lum < (1001.0 / 1023.0))
+    {
+        output_color = make_float3(0.9882f, 0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (760.1 / 1023.0) && curr_lum <= (871.5 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (650.3 / 1023.0) && curr_lum <= (760.1 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (543.6 / 1023.0) && curr_lum <= (650.3 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (442.6 / 1023.0) && curr_lum <= (543.6 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (395.4 / 1023.0) && curr_lum <= (442.6 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (368.5 / 1023.0) && curr_lum <= (395.4 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (342.9 / 1023.0) && curr_lum <= (368.5 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (310.8 / 1023.0) && curr_lum < (342.9 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (274.6 / 1023.0) && curr_lum < (310.8 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (216.5 / 1023.0) && curr_lum < (274.6 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (177.1 / 1023.0) && curr_lum < (216.5 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (153.3 / 1023.0) && curr_lum < (177.1 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (140.6 / 1023.0) && curr_lum < (153.3 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (133.0 / 1023.0) && curr_lum < (140.6 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (133.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == AppleLog55)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (800.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (756.2 / 1023.0) && curr_lum < (800.0 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (669.5 / 1023.0) && curr_lum <= (756.2 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (583.7 / 1023.0) && curr_lum <= (669.5 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (541.3 / 1023.0) && curr_lum <= (583.7 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (516.2 / 1023.0) && curr_lum <= (541.3 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (491.2 / 1023.0) && curr_lum <= (516.2 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (458.4 / 1023.0) && curr_lum < (491.2 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (418.3 / 1023.0) && curr_lum < (458.4 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (342.5 / 1023.0) && curr_lum < (418.3 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (275.5 / 1023.0) && curr_lum < (342.5 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (221.1 / 1023.0) && curr_lum < (275.5 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (186.2 / 1023.0) && curr_lum < (221.1 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (169.7 / 1023.0) && curr_lum < (186.2 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (169.7 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == AppleLog1250)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (921.8 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (843.2 / 1023.0) && curr_lum <= (921.8 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (756.2 / 1023.0) && curr_lum <= (843.2 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (669.5 / 1023.0) && curr_lum <= (756.2 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (583.7 / 1023.0) && curr_lum <= (669.5 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (541.3 / 1023.0) && curr_lum <= (583.7 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (516.2 / 1023.0) && curr_lum <= (541.3 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (491.2 / 1023.0) && curr_lum <= (516.2 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (458.4 / 1023.0) && curr_lum < (491.2 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (418.3 / 1023.0) && curr_lum < (458.4 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (342.5 / 1023.0) && curr_lum < (418.3 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (275.5 / 1023.0) && curr_lum < (342.5 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (221.1 / 1023.0) && curr_lum < (275.5 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (186.2 / 1023.0) && curr_lum < (221.1 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (169.7 / 1023.0) && curr_lum < (186.2 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (169.7 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == Clog)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (999.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (971.5 / 1023.0) && curr_lum < (999.0 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (835.0 / 1023.0) && curr_lum <= (971.5 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (701.3 / 1023.0) && curr_lum <= (835.0 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (573.1 / 1023.0) && curr_lum <= (701.3 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (454.5 / 1023.0) && curr_lum <= (573.1 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (400.6 / 1023.0) && curr_lum <= (454.5 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (370.4 / 1023.0) && curr_lum <= (400.6 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (342.0 / 1023.0) && curr_lum <= (370.4 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (307.3 / 1023.0) && curr_lum < (342.0 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (269.1 / 1023.0) && curr_lum < (307.3 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (210.7 / 1023.0) && curr_lum < (269.1 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (173.6 / 1023.0) && curr_lum < (210.7 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (152.1 / 1023.0) && curr_lum < (173.6 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (140.4 / 1023.0) && curr_lum < (152.1 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (134.0 / 1023.0) && curr_lum < (140.4 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (134.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == ArriLogC3)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (912.1 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (775.2 / 1023.0) && curr_lum < (912.1 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (699.3 / 1023.0) && curr_lum <= (775.2 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (623.5 / 1023.0) && curr_lum <= (699.3 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (548.1 / 1023.0) && curr_lum <= (623.5 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (473.4 / 1023.0) && curr_lum <= (548.1 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (436.5 / 1023.0) && curr_lum <= (473.4 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (414.5 / 1023.0) && curr_lum <= (436.5 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (392.8 / 1023.0) && curr_lum <= (414.5 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (364.2 / 1023.0) && curr_lum < (392.8 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (329.2 / 1023.0) && curr_lum < (364.2 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (263.0 / 1023.0) && curr_lum < (329.2 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (204.4 / 1023.0) && curr_lum < (263.0 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (156.7 / 1023.0) && curr_lum < (204.4 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (125.8 / 1023.0) && curr_lum < (156.7 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (101.7 / 1023.0) && curr_lum < (125.8 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (101.7 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == ArriLogC4)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (721.5 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (602.6 / 1023.0) && curr_lum < (721.5 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (536.8 / 1023.0) && curr_lum <= (602.6 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (471.4 / 1023.0) && curr_lum <= (536.8 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (407.0 / 1023.0) && curr_lum <= (471.4 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (344.3 / 1023.0) && curr_lum <= (407.0 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (314.0 / 1023.0) && curr_lum <= (344.3 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (296.3 / 1023.0) && curr_lum <= (314.0 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (279.1 / 1023.0) && curr_lum <= (296.3 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (257.0 / 1023.0) && curr_lum < (279.1 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (230.8 / 1023.0) && curr_lum < (257.0 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (185.2 / 1023.0) && curr_lum < (230.8 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (150.4 / 1023.0) && curr_lum < (185.2 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (126.7 / 1023.0) && curr_lum < (150.4 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (112.1 / 1023.0) && curr_lum < (126.7 / 123.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (99.0 / 1023.0) && curr_lum < (112.1 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (99.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == Alexa35LogC4)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (845.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (734.8 / 1023.0) && curr_lum < (845.0 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (602.6 / 1023.0) && curr_lum <= (734.8 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (471.4 / 1023.0) && curr_lum <= (602.6 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (407.0 / 1023.0) && curr_lum <= (471.4 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (344.3 / 1023.0) && curr_lum <= (407.0 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (314.0 / 1023.0) && curr_lum <= (344.3 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (296.3 / 1023.0) && curr_lum <= (314.0 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (279.1 / 1023.0) && curr_lum <= (296.3 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (257.0 / 1023.0) && curr_lum < (279.1 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (230.8 / 1023.0) && curr_lum < (257.0 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (185.2 / 1023.0) && curr_lum < (230.8 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (150.4 / 1023.0) && curr_lum < (185.2 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (126.7 / 1023.0) && curr_lum < (150.4 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (112.1 / 1023.0) && curr_lum < (126.7 / 123.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (99.0 / 1023.0) && curr_lum < (112.1 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (99.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == RedLog3G10)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (815.9 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (677.9 / 1023.0) && curr_lum < (815.9 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (609.1 / 1023.0) && curr_lum <= (677.9 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (540.6 / 1023.0) && curr_lum <= (609.1 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (472.7 / 1023.0) && curr_lum <= (540.6 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (405.8 / 1023.0) && curr_lum <= (472.7 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (373.1 / 1023.0) && curr_lum <= (405.8 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (353.7 / 1023.0) && curr_lum <= (373.1 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (334.7 / 1023.0) && curr_lum <= (353.7 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (309.9 / 1023.0) && curr_lum < (334.7 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (279.9 / 1023.0) && curr_lum < (309.9 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (225.2 / 1023.0) && curr_lum < (279.9 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (179.7 / 1023.0) && curr_lum < (225.2 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (145.7 / 1023.0) && curr_lum < (179.7 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (123.0 / 1023.0) && curr_lum < (145.7 / 123.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (101.8 / 1023.0) && curr_lum < (123.0 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (101.8 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == BMDFilmG5)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (735.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (698.0 / 1023.0) && curr_lum < (735.0 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (636.4 / 1023.0) && curr_lum <= (698.0 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (575.0 / 1023.0) && curr_lum <= (636.4 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (513.7 / 1023.0) && curr_lum <= (575.0 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (452.7 / 1023.0) && curr_lum <= (513.7 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (422.4 / 1023.0) && curr_lum <= (452.7 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (404.4 / 1023.0) && curr_lum <= (422.4 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (386.4 / 1023.0) && curr_lum <= (404.4 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (362.6 / 1023.0) && curr_lum < (386.4 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (333.3 / 1023.0) && curr_lum < (362.6 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (276.7 / 1023.0) && curr_lum < (333.3 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (224.2 / 1023.0) && curr_lum < (276.7 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (178.5 / 1023.0) && curr_lum < (224.2 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (142.1 / 1023.0) && curr_lum < (178.5 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (118.4 / 1023.0) && curr_lum < (142.1 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (118.4 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == PVlog)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (874.3 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (800.0 / 1023.0) && curr_lum < (874.3 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (725.8 / 1023.0) && curr_lum <= (800.0 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (651.7 / 1023.0) && curr_lum <= (725.8 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (578.0 / 1023.0) && curr_lum <= (651.7 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (504.9 / 1023.0) && curr_lum <= (578.0 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (468.8 / 1023.0) && curr_lum <= (504.9 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (447.3 / 1023.0) && curr_lum <= (468.8 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (426.0 / 1023.0) && curr_lum <= (447.3 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (397.9 / 1023.0) && curr_lum < (426.0 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (363.5 / 1023.0) && curr_lum < (397.9 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (298.2 / 1023.0) && curr_lum < (363.5 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (240.0 / 1023.0) && curr_lum < (298.2 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (192.1 / 1023.0) && curr_lum < (240.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (160.1 / 1023.0) && curr_lum < (192.1 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (135.9 / 1023.0) && curr_lum < (160.1 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (135.9 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == DlogM)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (942.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (870.0 / 1023.0) && curr_lum <= (942.0 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (757.0 / 1023.0) && curr_lum <= (870.0 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (633.0 / 1023.0) && curr_lum <= (757.0 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (534.7 / 1023.0) && curr_lum <= (633.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum >= (470.7 / 1023.0) && curr_lum <= (534.7 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (377.0 / 1023.0) && curr_lum < (470.7 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (264.0 / 1023.0) && curr_lum < (377.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (184.0 / 1023.0) && curr_lum < (264.0 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (144.0 / 1023.0) && curr_lum < (184.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (124.0 / 1023.0) && curr_lum < (144.0 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (114.0 / 1023.0) && curr_lum < (124.0 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (114.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == Dlog)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (899.3 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (796.6 / 1023.0) && curr_lum < (899.3 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (717.8 / 1023.0) && curr_lum <= (796.6 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (639.2 / 1023.0) && curr_lum <= (717.8 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (561.0 / 1023.0) && curr_lum <= (639.2 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (483.7 / 1023.0) && curr_lum <= (561.0 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (445.5 / 1023.0) && curr_lum <= (483.4 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (422.9 / 1023.0) && curr_lum <= (445.5 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (400.5 / 1023.0) && curr_lum <= (422.9 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (371.1 / 1023.0) && curr_lum < (400.5 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (335.2 / 1023.0) && curr_lum < (371.1 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (267.9 / 1023.0) && curr_lum < (335.2 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (209.2 / 1023.0) && curr_lum < (267.9 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (162.4 / 1023.0) && curr_lum < (209.2 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (129.7 / 1023.0) && curr_lum < (162.4 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (109.1 / 1023.0) && curr_lum < (129.7 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (109.1 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == NLog)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (985.6 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (881.6 / 1023.0) && curr_lum < (985.6 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (777.7 / 1023.0) && curr_lum <= (881.6 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (673.7 / 1023.0) && curr_lum <= (777.7 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (569.7 / 1023.0) && curr_lum <= (673.7 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (465.8 / 1023.0) && curr_lum <= (569.7 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (416.0 / 1023.0) && curr_lum <= (465.8 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (389.0 / 1023.0) && curr_lum <= (416.0 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (363.9 / 1023.0) && curr_lum <= (389.0 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (333.3 / 1023.0) && curr_lum < (363.9 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (299.2 / 1023.0) && curr_lum < (339.5 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (243.4 / 1023.0) && curr_lum < (299.2 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (202.0 / 1023.0) && curr_lum < (243.4 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (172.7 / 1023.0) && curr_lum < (202.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (153.3 / 1023.0) && curr_lum < (172.7 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (135.0 / 1023.0) && curr_lum < (153.3 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (135.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == FLog)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (1011.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (987.0 / 1023.0) && curr_lum < (1011.0 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (881.5 / 1023.0) && curr_lum <= (987.0 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (776.3 / 1023.0) && curr_lum <= (881.5 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (671.9 / 1023.0) && curr_lum <= (776.3 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (569.3 / 1023.0) && curr_lum <= (671.9 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (519.0 / 1023.0) && curr_lum <= (569.3 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (489.4 / 1023.0) && curr_lum <= (519.0 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (460.2 / 1023.0) && curr_lum <= (489.4 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (422.2 / 1023.0) && curr_lum < (460.2 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (376.4 / 1023.0) && curr_lum < (422.2 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (292.9 / 1023.0) && curr_lum < (376.4 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (223.9 / 1023.0) && curr_lum < (292.9 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (172.7 / 1023.0) && curr_lum < (223.9 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (138.7 / 1023.0) && curr_lum < (172.7 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (107.0 / 1023.0) && curr_lum < (138.7 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (107.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else if (GammaMode == FLog2)
+{
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (869.0 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (771.1 / 1023.0) && curr_lum < (869.0 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (695.7 / 1023.0) && curr_lum <= (771.1 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (620.6 / 1023.0) && curr_lum <= (695.7 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (546.0 / 1023.0) && curr_lum <= (620.6 / 1023.0)) 
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (472.2 / 1023.0) && curr_lum <= (546.0 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (418.8 / 1023.0) && curr_lum <= (472.2 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (414.2 / 1023.0) && curr_lum <= (418.8 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (392.9 / 1023.0) && curr_lum <= (414.2 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (364.9 / 1023.0) && curr_lum < (392.9 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (330.9 / 1023.0) && curr_lum < (364.9 / 1023.0)) 
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (267.2 / 1023.0) && curr_lum < (330.9 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (212.1 / 1023.0) && curr_lum < (267.2 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (168.6 / 1023.0) && curr_lum < (212.1 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (137.9 / 1023.0) && curr_lum < (168.6 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (114.0 / 1023.0) && curr_lum < (137.9 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (114.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+
+}
+else
+{ // Default to Slog3 if no specific mode is selected 
+
+    // Color assignment based on code value Ranges
+    if (curr_lum >= (886.3 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 1.0f, 1.0f);
+    }
+    else if (curr_lum > (807.7 / 1023.0) && curr_lum < (886.3 / 1023.0))
+    {
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+    }
+    else if (curr_lum > (729.1 / 1023.0) && curr_lum <= (807.7 / 1023.0))
+    {
+        output_color = make_float3(0.8706f, 0.3333f, 0.4431f);
+    }
+    else if (curr_lum > (650.8 / 1023.0) && curr_lum <= (729.1 / 1023.0))
+    {
+        output_color = make_float3(0.9333f, 0.0f, 0.0f);
+    }
+    else if (curr_lum > (572.9 / 1023.0) && curr_lum <= (650.8 / 1023.0))
+    {
+        output_color = make_float3(0.9843f, 0.7216f, 0.3843f);
+    }
+    else if (curr_lum > (495.7 / 1023.0) && curr_lum <= (572.9 / 1023.0))
+    {
+        output_color = make_float3(0.9569f, 0.4275f, 0.1647f);
+    }
+    else if (curr_lum > (464.5 / 1023.0) && curr_lum <= (495.7 / 1023.0))
+    {
+        output_color = make_float3(1.0f, 0.9725f, 0.6510f);
+    }
+    else if (curr_lum > (435.0 / 1023.0) && curr_lum <= (464.5 / 1023.0))
+    {
+        output_color = make_float3(0.9765f, 0.9098f, 0.0f);
+    }
+    else if (curr_lum >= (412.6 / 1023.0) && curr_lum <= (435.0 / 1023.0))
+    {
+        output_color = make_float3(0.5020f, 0.5020f, 0.5020f);
+    }
+    else if (curr_lum >= (383.1 / 1023.0) && curr_lum < (412.6 / 1023.0))
+    {
+        output_color = make_float3(0.6196f, 0.9137f, 0.2745f);
+    }
+    else if (curr_lum >= (347.1 / 1023.0) && curr_lum < (383.1 / 1023.0))
+    {
+        output_color = make_float3(0.0902f, 0.6824f, 0.1333f);
+    }
+    else if (curr_lum >= (279.2 / 1023.0) && curr_lum < (347.1 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.4784f, 0.1451f);
+    }
+    else if (curr_lum >= (219.5 / 1023.0) && curr_lum < (279.2 / 1023.0))
+    {
+        output_color = make_float3(0.1765f, 0.7490f, 0.9765f);
+    }
+    else if (curr_lum >= (171.0 / 1023.0) && curr_lum < (219.5 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.3804f, 0.6471f);
+    }
+    else if (curr_lum >= (133.0 / 1023.0) && curr_lum < (171.0 / 1023.0))
+    {
+        output_color = make_float3(0.5569f, 0.4314f, 0.7216f);
+    }
+    else if (curr_lum > (105.0 / 1023.0) && curr_lum < (133.0 / 1023.0))
+    {
+        output_color = make_float3(0.3490f, 0.2392f, 0.5843f);
+    }
+    else if (curr_lum <= (105.0 / 1023.0))
+    {
+        output_color = make_float3(0.0f, 0.0f, 0.0f);
+    }
+}
+return output_color;
+}
