@@ -1,6 +1,9 @@
 With this demo, you can now create your own false colour DCTL any way you like. 
 
 Pls note that DCTL ARE ONLY COMPATIBLE with Resolve Studio (paid version)
+Installation of DCTL is to just copy the file to the LUT folder Davinci Resolve that is installed on your system.
+Windows: C:\rogramData\Blackmagic Design\DaVinci Resolve\Support\LUT
+MacOS: /Library/Application Support/Blackmagic Design/DaVinci Resolve/LUT/
 
 Please refer to the images below for the gamma comparison table. I didn't share a version with value for every 0.1 stop calculated 
 as that would be too big a table to refer to, but you can refer to the Excel file named 
