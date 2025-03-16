@@ -1,10 +1,22 @@
 #line 2 "Exposure Zone False Colour code demo.dctl"
-// line 1 tells resolve to show the correct line number counting from the next line which is line 2 and the correct "file name" to display when error detected in running of the dctl. //
-// https://www.youtube.com/watch?v=1BtydnVhk14 Watch this great YouTube tutorial on what to do for setting up your running of DCTL coding and where to find resolve debug txt. //
-// DO REMEMBER DCTL can only be used with Resolve Studio the paid version. After coding this, you can export LUTs for your monitor from resolve to use it in other scenarios. // 
+/* line 1 tells resolve to show the correct line number counting from the next line which is line 2 
+and the correct "file name" to display when error detected in running of the dctl. Rename the filename as per necessary. */
 
-DEFINE_UI_PARAMS(GammaMode, Gamma_Mode, DCTLUI_COMBO_BOX, 0, { Slog3iso800, Slog3iso12800, /* Name the various Gamma you wish to include for the drop down selection box */})
-// the above line, you can rename GammaMode to any word you want to represent the gamma, but is one word. 'Gamma_Mode' is the name that will appear for the combo box. 'DCTLUI_COMBO_BOX' is the UI type, then '0' being default to none or the default you specify. */
+/* https://www.youtube.com/watch?v=1BtydnVhk14 Watch this great YouTube tutorial on what to do for setting up your running of DCTL coding 
+and where to find resolve debug txt. */
+
+/* DO REMEMBER DCTL can only be used with Resolve Studio the paid version. 
+After coding this, you can export 3DLUTs for you to use on other monitoring tools or use in resolve. 
+But it is recommended to just use the DCTL version inside Resolve. */ 
+
+/* When openning this DCTL file with a coding app like VScode, you can set the language mode to C# to help with your viewing of the codes 
+ and comments can be deleted for the final file that will be deployed, but do keep important comments for future references */ 
+
+DEFINE_UI_PARAMS(GammaMode, Gamma_Mode, DCTLUI_COMBO_BOX, 0, { Slog3iso800, Slog3iso12800, /* Name the various Gamma to include for the dropdown selection */})
+/* Keep the above line in a single line, and you can rename 
+'GammaMode' to any word you want to represent the gamma that will be used, but must be one word, case sensitive. 
+'Gamma_Mode' is the name that will appear for the combo box dropdown menu. 
+'DCTLUI_COMBO_BOX' is the UI type, and '0' being default to none or the default you specify. */
 
 __DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, float p_R, float p_G, float p_B) { 
     
@@ -14,23 +26,29 @@ __DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, float p
 // Initialize the Output Color
 float3 output_color = make_float3(0.0f, 0.0f, 0.0f);
 
-if (GammaMode == Slog3iso800)
+/* From this part onwards, you will have to edit the code accordingly, before you proceed, please figure out the set of values you will use for 
+the parameters of your zones */
+
+if (GammaMode == Slog3iso800) // Ensure 'GammaMode' is spelled correctly, and the Log curve to be used is correct.
 {
 
-    // Color assignment based on code value Ranges. Use your own range logic if you prefer.
+    /* Color assignment based on code value (CV) Ranges. Use your own range logic if you prefer. I used CV as it is easy to reference, you can also 
+    use the value derived after the log encoding and use more than 4 decimal places for higher precision. If you referenced the IRE% value, just divide 
+    the IRE% value by 100 and use that instead, it will be the same as the value derived from the scene reflectance to log transfer function. */
     
-    if (curr_lum >= (886.3 / 1023.0)) //For 10bit code value this is how you write, you can also 0.86637, just that the decimal points may be endless//
+    if (curr_lum >= (886.3 / 1023.0)) // This sets the parameter for the luminance range. For 10bit code value this is how you write, you can also write 0.86637 and vice versa. 
     {
-        output_color = make_float3(1.0f, 1.0f, 1.0f); // this tells resolve what color to make for the corresponding luminance value you defined, here the r, g, b values make the colour white
+        output_color = make_float3(1.0f, 1.0f, 1.0f); // makes output pure white
+    // this tells resolve what color to make for the corresponding luminance range you defined, here the r, g, b values make the colour white
     }
-    else if (curr_lum > (807.7 / 1023.0) && curr_lum < (886.3 / 1023.0)) //the && means both condition must be met
+    else if (curr_lum > (807.7 / 1023.0) && curr_lum < (886.3 / 1023.0)) // the '&&' means both condition must be met
     {
-        output_color = make_float3(0.9882f,0.6314f, 0.7137f);
+        output_color = make_float3(0.9882f,0.6314f, 0.7137f); // you can reference the readme file on how to get your colour values, the short ans is to  divide the 8bit colour value measured by 255 for each channel.
     }
-    // else if... repeat code until all the ranges you want for your false color are complete...//
+    // 'else if...' repeat code like above until all the ranges you want for your false colour zones are complete...//
     else if (curr_lum <= (105.0 / 1023.0))
     {
-        output_color = make_float3(0.0f, 0.0f, 0.0f);
+        output_color = make_float3(0.0f, 0.0f, 0.0f); // makes the output pure black
     }
 }
 else if (GammaMode == Slog3iso12800)
@@ -48,7 +66,7 @@ else if (GammaMode == Slog3iso12800)
     {
         output_color = make_float3(0.0f, 0.0f, 0.0f);
     }
-} // repeat above codes until you complete all the gamma you wish to include.// 
+} // repeat above codes until you complete all the Log curves you wish to include.// 
 else 
 { // Default to Slog3 if no specific mode is selected. You can set other gamma as default value to be shown. 
 
@@ -65,17 +83,35 @@ else
 return output_color;
 }    
 
-//If you design your color code for the false color in program like Photoshop, your image is likely in 8bit, and color value for each channel is 0-255. After you set your desired color, use eye dropper tool to get info, record down the r,g,b values and divide each by 255, you'll get the value for the resolve output_color//
+/* You can also visit Ed Lachman's website to learn more about EL Zone false color. https://www.elzonesystem.com/ */
 
-//Visit Ed Lachman's website to learn more about EL Zone false color. https://www.elzonesystem.com/ //
+/* If you design your color code for the false color in program like Photoshop, your image is likely in 8bit, and color value for each channel is 0-255. 
+After you set your desired color, use eye dropper tool to get info, record down the r,g,b values and divide each by 255, you'll get the value for the resolve output_color 
 
-//I set my middle grey to only show up on one third a stop from -0.1 to 0.2 with logic that looks like this, 'stop -0.1' >= 'middle grey color' <= 'stop 0.2' //
-//based on the middle grey stop, stops brighter have a logic of 'stop 0.2' < 'your color' <= 'stop 0.5' and the next line being 'stop 0.5' < 'your color' <= 'stop 1' until the brightest stop where 'stop 6' < 'your color' < 'clipping point' and then clipping point has its own line stating the color.//
-//for logic under the middle grey stop, 'stop -0.1' < 'your color' >= 'stop -0.5' and then 'stop -0.5' < 'your color' >= 'stop -1' and vice versa until the last stop where for instance, 'stop -5' < 'your color' > 'black point' and then the last line show clipped black with 'black point' >= 'black' //
-//The way i designated the logic is to show the exact stop value at the point where two colors meet, this will enable you to be super precise on your exposure. //
+I set my middle grey to only show up on one third a stop from -0.1 to 0.2 with parameter logic that looks like this, 
+'stop -0.1' >= 'middle grey color' <= 'stop 0.2' 
 
-//Each camera has different performance despite using the same gamma curve, you can consider finding dynamic range lab test results done by CineD or Gerald Undone to set your black and white clipping point//
+Stops brighter than middle grey have a logic of 'stop 0.2' < 'your color' <= 'stop 0.5' 
+and the next line being 'stop 0.5' < 'your color' <= 'stop 1' 
+until the brightest stop where 'stop 6' < 'your color' < 'clipping point' 
+and then clipping point has its own line stating the color, either pure white or black.
 
-//scene linear reflectance rate are calculated by the following equation, V = 0.18 * pow(2,X) with V being the linear reflectance rate and X being the amount of stops, i.e. -2, 0.1, 5.0, 2.322,... // 
+for logic under the middle grey stop, 'stop -0.1' < 'your color' >= 'stop -0.5' 
+and then 'stop -0.5' < 'your color' >= 'stop -1' and vice versa 
+until the last stop where for instance, 'stop -5' < 'your color' > 'black point' 
+and then the last line show clipped black with 'black point' >= 'black' 
+
+The way I designated the logic range is to show the exact stop value at the point where two colors meet, this will enable you to be super precise on your exposure. 
+You can also choose to set the logic range to be showing colour for stop1.5 to stop2.5 to represent stop2, but this you will have to reference the excel sheet for 
+the other data to use as your range. 
+
+Each camera has different performance despite using the same Log curve, you can consider finding dynamic range lab test results done by CineD or Gerald Undone 
+to set your black and white clipping point for your camera in question. 
+
+Scene linear reflectance rate are calculated by the following equation, 
+o.18 = middle grey
+V = 0.18 * pow(2,X) 
+with V being the linear reflectance rate and 
+X being the amount of stops, i.e. -2, 0.1, 5.0, 2.322,... */ 
 
 
