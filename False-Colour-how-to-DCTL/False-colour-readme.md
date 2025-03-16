@@ -27,6 +27,11 @@ IRE value ranges from 0%-100% (if you take IRE% divide by 100 then multiply by 1
 
 If you wish to have a higher precision of more than four decimal places in the value used to determine your luminance range for the false colour, feel free to reference the excel sheet and reference the "scene linear to Log out data column".
 
+Sample for setting colours for your exposure zones. Feel free to use your own set of colour and range logic for your DCTL
+![Zones - float value](https://github.com/user-attachments/assets/96cc2634-17aa-4b70-99e7-9b946510f403)
+<img width="1189" alt="Range logic" src="https://github.com/user-attachments/assets/bc3e1b93-1747-449e-967e-3b92a07dd1c0" />
+
+
 The coding program I used is VS Code: https://code.visualstudio.com/download
 But feel free to use your own coding program. 
 
