@@ -14,6 +14,7 @@ Please refer to the comments made inside the "Exposure Zone False Colour code de
 Please refer to the images below for the gamma comparison table. I didn't share a version with value for every 0.1 stop calculated 
 as that would be too big a table to refer to, but you can refer to the Excel file named 
 "Scene reflectance to log Reference Table" 
+* FLog2C of Fujifilm has not yet been added to the excel sheet.
 If you wish to calculate your own version, feel free to search for the various 
 white papers that the respective manufacturer publishes for each gamma. 
 
